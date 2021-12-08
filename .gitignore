@@ -16,3 +16,11 @@ api.json
 # Binaries
 build/
 *.obj
+
+# Excluded
+.import
+*.translation
+export_presets.cfg
+.mono
+.github
+addons/godot-git-plugin
