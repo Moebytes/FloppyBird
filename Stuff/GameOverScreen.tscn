@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Themes/MainText.tres" type="Theme" id=1]
+[ext_resource path="res://Art/quit.png" type="Texture" id=2]
+[ext_resource path="res://Art/restart.png" type="Texture" id=3]
+[ext_resource path="res://Stuff/GameOverScreen.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.282353, 0.282353, 0.282353, 0.94902 )
+
+[node name="GameOverScreen" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer"]
+margin_left = 330.0
+margin_top = 130.0
+margin_right = 694.0
+margin_bottom = 470.0
+custom_constants/separation = 40
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/CenterContainer/VBoxContainer"]
+margin_right = 364.0
+margin_bottom = 60.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/CenterContainer/VBoxContainer/CenterContainer"]
+margin_left = 47.0
+margin_right = 317.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 270, 60 )
+theme = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[shake][rainbow freq=1 sat=0.3]Game Over[/rainbow][/shake]"
+text = "Game Over"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="PanelContainer/CenterContainer/VBoxContainer"]
+margin_top = 100.0
+margin_right = 364.0
+margin_bottom = 160.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer/VBoxContainer/CenterContainer2"]
+margin_right = 364.0
+margin_bottom = 60.0
+
+[node name="HighScore" type="RichTextLabel" parent="PanelContainer/CenterContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+margin_right = 300.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 60 )
+theme = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "High Score:"
+text = "High Score:"
+
+[node name="0" type="RichTextLabel" parent="PanelContainer/CenterContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+margin_left = 304.0
+margin_right = 364.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+theme = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "0"
+text = "0"
+
+[node name="CenterContainer3" type="CenterContainer" parent="PanelContainer/CenterContainer/VBoxContainer"]
+margin_top = 200.0
+margin_right = 364.0
+margin_bottom = 250.0
+
+[node name="Restart" type="TextureButton" parent="PanelContainer/CenterContainer/VBoxContainer/CenterContainer3"]
+margin_left = 82.0
+margin_right = 282.0
+margin_bottom = 50.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 3 )
+
+[node name="CenterContainer4" type="CenterContainer" parent="PanelContainer/CenterContainer/VBoxContainer"]
+margin_top = 290.0
+margin_right = 364.0
+margin_bottom = 340.0
+
+[node name="Quit" type="TextureButton" parent="PanelContainer/CenterContainer/VBoxContainer/CenterContainer4"]
+margin_left = 82.0
+margin_right = 282.0
+margin_bottom = 50.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 2 )
+
+[connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer/CenterContainer3/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer/CenterContainer4/Quit" to="." method="_on_Quit_pressed"]

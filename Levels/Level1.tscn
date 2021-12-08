@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Player/Bird.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Stuff/DoublePipes.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Stuff/Background.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Stuff/GameOverlay.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Stuff/PauseMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Stuff/GameOverScreen.tscn" type="PackedScene" id=6]
+
+[node name="World" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2( 0.516742, 0.304658 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Bird" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( -132, 3 )
+
+[node name="DoublePipes" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 246, 205 )
+
+[node name="Background" parent="YSort" instance=ExtResource( 3 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOverlay" parent="CanvasLayer" instance=ExtResource( 4 )]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 5 )]
+visible = false
+
+[node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource( 6 )]
+visible = false
+
+[connection signal="game_over" from="YSort/Bird" to="CanvasLayer/GameOverScreen" method="_on_Bird_game_over"]
+[connection signal="score_update" from="YSort/DoublePipes" to="CanvasLayer/GameOverlay/CenterContainer/Score" method="_on_DoublePipes_score_update"]
+[connection signal="highscore_update" from="CanvasLayer/GameOverlay/CenterContainer/Score" to="CanvasLayer/GameOverScreen" method="_on_Score_highscore_update"]
+
+[editable path="CanvasLayer/GameOverlay"]
